@@ -2,7 +2,6 @@ package date.and.time.api;
 
 import common.test.tool.annotation.Easy;
 import common.test.tool.dataset.DateAndTimes;
-
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -11,7 +10,7 @@ import java.time.Period;
 import java.time.temporal.TemporalAdjusters;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class Exercise1Test {
 
@@ -20,8 +19,7 @@ public class Exercise1Test {
         /**
          * Create a {@link LocalDate} of 2015-06-18 by using {@link LocalDate#of}
          */
-        LocalDate localDate = null;
-
+        LocalDate localDate = LocalDate.of(2015, 06, 18);
         assertThat(localDate.toString(), is("2015-06-18"));
     }
 
@@ -30,7 +28,7 @@ public class Exercise1Test {
         /**
          * Create a {@link LocalDate} of 2015-06-18 from String by using {@link LocalDate#parse}
          */
-        LocalDate localDate = null;
+        LocalDate localDate = LocalDate.parse("2015-06-18");
 
         assertThat(localDate.toString(), is("2015-06-18"));
     }

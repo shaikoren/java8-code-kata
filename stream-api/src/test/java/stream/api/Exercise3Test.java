@@ -3,7 +3,6 @@ package stream.api;
 import common.test.tool.annotation.Easy;
 import common.test.tool.dataset.ClassicOnlineStore;
 import common.test.tool.entity.Customer;
-
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -12,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class Exercise3Test extends ClassicOnlineStore {
 
@@ -29,15 +28,15 @@ public class Exercise3Test extends ClassicOnlineStore {
     }
 
     @Easy @Test
-    public void richestCustomer() {
+    public void richest_customer() {
         List<Customer> customerList = this.mall.getCustomerList();
 
         /**
          * Find the richest customer's budget by using {@link Stream#max} and {@link Comparator#naturalOrder}
          * Don't use {@link Stream#sorted}
          */
-        Comparator<Integer> comparator = null;
-        Optional<Integer> richestCustomer = null;
+        Comparator<Integer> comparator = (x, y) -> x.compareTo(y);
+        Optional<Integer> richestCustomer = customerList.stream().map(customer -> customer.getBudget()).max(comparator);
 
         assertThat(comparator.getClass().getSimpleName(), is("NaturalOrderComparator"));
         assertThat(richestCustomer.get(), is(12000));
@@ -51,8 +50,8 @@ public class Exercise3Test extends ClassicOnlineStore {
          * Find the youngest customer by using {@link Stream#min}
          * Don't use {@link Stream#sorted}
          */
-        Comparator<Customer> comparator = null;
-        Optional<Customer> youngestCustomer = null;
+        Comparator<Customer> comparator = (x, y) -> x.getAge().compareTo(y.getAge());
+        Optional<Customer> youngestCustomer = customerList.stream().min(comparator);
 
         assertThat(youngestCustomer.get(), is(customerList.get(8)));
     }
